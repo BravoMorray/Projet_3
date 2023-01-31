@@ -1,0 +1,95 @@
+/* CSS FOOTER */
+
+.liens {  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "Contact Mentions-légales";
+}
+
+.Contact {
+  justify-self: center;
+  grid-area: Contact;
+}
+
+.Mentions-légales {
+  justify-self: center;
+  grid-area: Mentions-légales;
+}
+
+/* CSS Header */
+
+.Bandeau {  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "Logo affichage_Username";
+}
+
+.Logo {
+  justify-self: center;
+  grid-area: Logo;
+}
+
+.logo_Banque{
+  display : flex;
+  max-width : 25%;
+  height : auto;
+}
+
+.logo_Utilisateur {
+  display : flex;
+  max-width : 5%;
+  height : auto;
+}
+
+
+
+.affichage_Username {
+  justify-self: center;
+  grid-area: affichage_Username;
+  text-align : center;
+}
+
+/* CSS Login */
+
+.login_Form {
+  text-align : center;
+}
+
+.box-input {
+  text-align : center;
+ justify-content: center;
+}
+
+.login_Disp {  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "Identifiant Mot-de-passe"
+    "Bouton Bouton";
+}
+
+.Identifiant {
+  justify-self: center;
+  align-self: center;
+  grid-area: Identifiant;
+}
+
+.Mot-de-passe {
+  justify-self: center;
+  align-self: center;
+  grid-area: Mot-de-passe;
+}
+
+.Bouton {
+  justify-self: center;
+  align-self: center;
+  grid-area: Bouton;
+}

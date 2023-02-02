@@ -1,5 +1,4 @@
 <?php
-session_start();
 require('connectionbdd.php');
 ?>
 
@@ -11,6 +10,33 @@ require('connectionbdd.php');
 <body>
 <?php include('header.php'); ?>
 
+<!-- Vérification que quelqu'un n'est pas déja connecté --> 
+<?php if (isset($_SESSION['active_User'])) {header('Location: Accueil.php');} ?>
+
+
+<!-- Vérification de l'adresse mail --> 
+<?php
+function Mail_Ok(string $mail) : bool
+{
+require('connectionbdd.php');
+$Mail_OK = false;
+$Mails_Bruts = $db->prepare('SELECT Mail FROM users WHERE Mail = :Mail');
+$Mails_Bruts->execute(['Mail' => $mail]);
+$Mails_Tries = $Mails_Bruts->fetchAll();
+$var = false;
+foreach   ($Mails_Tries as $Mails_Tries)
+{
+    $var=in_array($mail, $Mails_Tries);
+}
+if ($var == true)
+{return false;}
+else
+{return true;}
+}
+
+?>
+
+
 <!-- Traitement du formulaire -->
 
 <?php
@@ -19,6 +45,7 @@ if (isset($_POST['Username']) AND isset($_POST['Mail']) AND isset($_POST['Passwo
     {
         if(filter_var($_POST['Mail'], FILTER_VALIDATE_EMAIL, 0) != false)
         {
+            if(Mail_OK($_POST['Mail'])) {
             $Requete = 'INSERT INTO users(Username, Mail, Password, Question, Reponse) VALUES(:Username, :Mail, :Password, :Question, :Reponse) ';
             $InsertionUtilisateur = $db->prepare($Requete);
             $InsertionUtilisateur->execute([
@@ -29,6 +56,11 @@ if (isset($_POST['Username']) AND isset($_POST['Mail']) AND isset($_POST['Passwo
             'Reponse' => $_POST['Reponse'],
                 ]);
             echo('Bah bravo morray, c est réussi !');
+            }
+            else
+            {
+            echo('Cet e mail est déja utilisé');
+            }
         }
         else 
         {
@@ -41,33 +73,36 @@ if (isset($_POST['Username']) AND isset($_POST['Mail']) AND isset($_POST['Passwo
 
 <!-- Formulaire d'inscription -->
 
+<div id="container-2">
+
 <form class="box" action="" method="post" name="register">
 <h1 class="box-title"> Inscription sur GBAF </h1>
 
 <!-- utilisateurs -->
-<h2> Saisissez ici votre nom d'utilisateur.</h2>
+ Saisissez ici votre nom d'utilisateur.
 <input type="text" class="box-input" name="Username" placeholder="Nom d'utilisateur">
 
 <!-- mail -->
-<h2> Saisissez ici votre adresse e-mail</h2>
+Saisissez ici votre adresse e-mail
 <input type="e-mail" class="box-input" name="Mail" placeholder="Adresse mail">
 
 <!-- mdp -->
-<h2> Saisissez ici votre mot de passe</h2>
+Saisissez ici votre mot de passe
 <input type="password" class="box-input" name="Password" placeholder="Mot de passe">
 
 <!-- Question secrete -->
-<h2> Saisissez ici votre question secrete</h2>
+Saisissez ici votre question secrete
 <input type="password" class="box-input" name="Question" placeholder="Question secrete">
 
 <!-- Reponse secrete -->
-<h2> Saisissez ici votre question secrete</h2>
+Saisissez ici votre question secrete
 <input type="password" class="box-input" name="Reponse" placeholder="Question secrete">
 
 <!-- bouton -->
-<br>
-<br>
+
 <input type="submit" value="Valider " name="submit" class="box-button">
+
+</div>
 
 <?php include('footer.php'); ?>
 

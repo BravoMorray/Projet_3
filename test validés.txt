@@ -1,0 +1,42 @@
+Test validés
+
+
+<!-- Test 1 : Récupération de données -->
+
+<?php
+$Tableau = $db->prepare('SELECT * FROM users');
+$Tableau->execute();
+$Tableau_Trie = $Tableau->fetch();
+var_dump($Tableau_Trie);
+?>
+
+<!--Validé ! --> 
+
+<!-- Test 2 : Insertion de données de données -->
+<!--
+<?php
+$Requete = 'INSERT INTO users(Username, Mail, Password, Question, Reponse) VALUES(:Username, :Mail, :Password, :Question, :Reponse) ';
+$InsertionUtilisateur = $db->prepare($Requete);
+$InsertionUtilisateur->execute([
+'Username' => 'Utilisateur test',
+'Mail' => 'Utilisateur test',
+'Password' => 'Utilisateur test',
+'Question' => 'Utilisateur test',
+'Reponse' => 'Utilisateur test',
+                ]);
+echo('Bah bravo morray, c est réussi !');
+
+?>
+-->
+<!-- Validé ! -->
+
+
+<!-- Test 3 : Récupérer les mots de passes ! --> 
+<?php
+$username = 'Bonjour';
+$Motsdepasses_Bruts = $db->prepare('SELECT Password FROM users WHERE Username = :Username');
+$Motsdepasses_Bruts-> execute(['Username' => $username]);
+$Motsdepasses_Tries = $Motsdepasses_Bruts->fetchAll();
+print_r($Motsdepasses_Tries);
+echo($Motsdepasses_Tries[0][0]);
+?>

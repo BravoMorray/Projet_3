@@ -7,7 +7,7 @@ require('connectionbdd.php');
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="style.css" />
+<?php include('style.php'); ?>
 </head>
 <body>
 
@@ -28,7 +28,7 @@ if (isset($_POST['username']) && isset($_POST['password']))
         $Motsdepasses_Bruts = $db->prepare('SELECT Password FROM users WHERE Username = :Username');
         $Motsdepasses_Bruts-> execute(['Username' => $username]);
         $Motsdepasses_Tries = $Motsdepasses_Bruts->fetchAll();
-        if (password_verify($_POST['password'], $Motsdepasses_Tries[0][0])) // Affiner avec passwordverify par la suite
+       if (!empty($Motsdepasses_Tries) && password_verify($_POST['password'], $Motsdepasses_Tries[0][0])) // Affiner avec passwordverify par la suite
           {
           $_SESSION['active_User'] = $_POST['username'];
           header('Location: Accueil.php');

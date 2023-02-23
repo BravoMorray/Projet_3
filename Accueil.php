@@ -5,7 +5,7 @@ require('connectionbdd.php');
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="style.css" />
+<?php include('style.php'); ?>
 </head>
 <body>
 <?php include('header.php'); ?>
@@ -22,116 +22,41 @@ require('connectionbdd.php');
 
 </div>
 
-<!-- J'ai écris le css ici car il ne s'actualise pas dans style.css :/ --> 
-
-<style>
-  .banque-list {
-    width: 80%;
-    margin: 0 auto;
-    border: 1px solid #f1f1f1;
-  }
-  
-  .banque-card {
-    width: 100%;
-    margin: 5% 0;
-    padding: 30px;
-    border: 1px solid #f1f1f1;
-    background: #fff;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-network error
-}
-
-.logo {
-width: 150px;
-height: 150px;
-margin-right: 30px;
-}
-
-h3.nom {
-font-size: 30px;
-font-weight: bold;
-margin-bottom: 20px;
-}
-
-p.description {
-font-size: 16px;
-font-family: Arial, sans-serif;
-}
-
-.banque-link {
-text-decoration: none;
-color: inherit;
-}
-
-.read-more-btn {
-padding: 10px 20px;
-background-color: #f1f1f1;
-border-radius: 25px;
-text-align: center;
-cursor: pointer;
-}
-
-@media only screen and (max-width: 768px) {
-.banque-card {
-width: 100%;
-padding: 15px;
-}
-
-.logo {
-  width: 100px;
-  height: 100px;
-}
-
-h3.nom {
-  font-size: 20px;
-}
-
-p.description {
-  font-size: 14px;
-}
-}
-
-</style>
-
 
 <!-- Récupération des données de la base de données --> 
 <div class="banque-list">
   <?php 
-    // Prepare and execute the SQL query
+    // Préparation de la requete sql
     $res = $db->prepare('SELECT nom, logo, description FROM banques');
     $res->execute();
 
-    // Fetch the results as an associative array
+    // Fetch des résultats
     $images = $res->fetchAll(PDO::FETCH_ASSOC);
 
-    // Loop through the images and display them
+    // Boucle sur chaque image et affichage correspondant au cahier des charges
     foreach ($images as $img) {
-      echo "<div class='banque-card'>";
-        echo "<a class='banque-link' href='banque.php?nom=" . urlencode($img['nom']) . "'>";
-          echo '<img class="logo" src="data:image/png;base64,'.base64_encode($img['logo']).'">';
-          echo "<div>";
-            echo "<h3 class='nom'>" . $img['nom'] . "</h3>";
-            echo "<p class='description'>" . $img['description'] . "</p>";
-          echo "</div>";
-        echo "</a>";
-        echo "<a href='banque.php?nom=" . urlencode($img['nom']) . "'><div class='read-more-btn'>Lire la suite</div></a>";
-      echo "</div>";
+      ?>
+       <a class='banque-link' href='banque.php?nom=<?=urlencode($img['nom'])?>'>
+      <div class='banque-card'>
+        <div>
+        <img class="logo" src="data:image/png;base64,<?=base64_encode($img['logo'])?>">
+        </div>
+
+        <div>
+            <h3 class='nom'> <?=$img['nom'];?></h3>
+            <p class='description'><?=$img['description']?></p>      
+        </div>
+
+      <div>
+      <a href='banque.php?nom=<?=urlencode($img['nom'])?>'><div class='read-more-btn'>Lire la suite</div></a>
+      </div>
+      
+    </div>
+      </a>
+      <?php 
     }
   ?>
 </div>
-
-
-
-
-</body>
-</html>
-
-</body>
-</html>
 
 
 </body>

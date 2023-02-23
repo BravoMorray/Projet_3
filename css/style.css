@@ -130,9 +130,9 @@ input[type=submit]:hover {
   }
 
 .banque-list {
-  display: flex;
-  flex-wrap: wrap;
-  flex direction : column;
+  /*display: flex;
+  flex-wrap: wrap;*/
+  /*flex-direction : column;*/
   justify-content: space-between;
   padding-top : 50px;
 
@@ -154,7 +154,8 @@ input[type=submit]:hover {
   box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
   text-align: center;
   margin-bottom: 2em;
-  display: block; 
+  display: flex; 
+  justify-content: space-between;
 }
 
 .banque-card img.logo {

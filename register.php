@@ -5,7 +5,7 @@ require('connectionbdd.php');
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="style.css" />
+<?php include('style.php'); ?>
 </head>
 <body>
 <?php include('header.php'); ?>

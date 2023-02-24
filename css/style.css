@@ -48,20 +48,36 @@
   display: flex;
   max-width: 5%;
   height: auto;
+  margin : 5%
 }
 
 .affichage_Username {
-  justify-self: center;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   grid-area: affichage_Username;
   text-align: center;
+  width : 80%
+}
+
+.deconnexion-form, .parametres-form {
+  display: inline-block;
+  margin-left: 10px;
 }
 
 input[type="submit"] {
   padding: 6px 12px;
   border-radius: 5px;
   font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
 }
 
+input[type="submit"]:hover {
+  background-color: #0062cc;
+  cursor: pointer;
+}
 
 /* CSS Login */
 
@@ -130,19 +146,12 @@ input[type=submit]:hover {
   }
 
 .banque-list {
-  /*display: flex;
-  flex-wrap: wrap;*/
-  /*flex-direction : column;*/
-  justify-content: space-between;
-  padding-top : 50px;
-
+  padding-top: 50px;
 }
 
 .banque-link {
-  text-decoration: none;
-  color: black;
-  display : block;
-  margin-bottom : 20px;
+text-decoration: none;
+color : black; /* Evite d'avoir tout le texte écrit en violet souliné comme un lien*/
 }
 
 .banque-card {
@@ -151,11 +160,10 @@ input[type=submit]:hover {
   padding: 1em;
   background-color: white;
   border-radius: 5px;
-  box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   text-align: center;
   margin-bottom: 2em;
-  display: flex; 
-  justify-content: space-between;
+  position : relative; /* Devient l'élément parent de positionnement pour le bouton en savoir plus */
 }
 
 .banque-card img.logo {
@@ -179,7 +187,10 @@ input[type=submit]:hover {
   text-align: center;
   padding: 0.5rem;
   border-radius: 0.25rem;
-  cursor: pointer;
+  font-weight: bold;
+  position : absolute; /* permet de positionner le bouton read more selon CdC */
+  bottom: 1%;
+  right: 1%;
 }
 
 .read-more-btn:hover {
@@ -187,11 +198,10 @@ input[type=submit]:hover {
 }
 
 
-
 /* CSS Banque */
 
 .banque-card-2 {
-    width:80%;
+ width:80%;
  margin:0 auto;
  margin-bottom : 5%;
  margin-top:5%;
@@ -410,6 +420,64 @@ body {
         margin-right: 10px;
     }
 
+/* CSS PARAMETRES.PHP */
+
+
+
+form input[type=text],
+form input[type=email],
+form input[type=password] {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #333;
+  margin : 15px;
+}
+
+form button[type=submit] {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  color: #fff;
+  background-color: gray;
+  cursor: pointer;
+  margin : 15px;
+}
+
+form button[type=submit]:hover {
+  background-color: #0069d9;
+}
+
+form button[type=submit]:focus {
+  outline: none;
+}
+
+form input[type=text]:focus,
+form input[type=email]:focus,
+form input[type=password]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px #eaf5ff;
+}
+
+
+#page_parametres {
+ width:80%;
+ margin:0 auto;
+ margin-bottom : 5%;
+ margin-top:5%;
+ padding: 30px;
+ border: 1px solid #f1f1f1;
+ background: #fff;
+ box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+ text-align: center;
+}
+
 
 /* Responsive */
 
@@ -418,3 +486,4 @@ body {
 width: 100%;
 padding: 15px;
 }
+

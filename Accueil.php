@@ -31,31 +31,30 @@ require('connectionbdd.php');
     $res->execute();
 
     // Fetch des résultats
-    $images = $res->fetchAll(PDO::FETCH_ASSOC);
+    $banques = $res->fetchAll(PDO::FETCH_ASSOC);
 
     // Boucle sur chaque image et affichage correspondant au cahier des charges
-    foreach ($images as $img) {
-      ?>
-       <a class='banque-link' href='banque.php?nom=<?=urlencode($img['nom'])?>'>
-      <div class='banque-card'>
-        <div>
-        <img class="logo" src="data:image/png;base64,<?=base64_encode($img['logo'])?>">
+ foreach ($banques as $banque) { ?>
+    <a class='banque-link' href="banque.php?nom=<?= urlencode($banque['nom']) ?>">
+        <div class='banque-card'>
+          <div>
+            <img class="logo" src="data:image/png;base64,<?= base64_encode($banque['logo']) ?>">
+          </div>
+
+          <div>
+            <h3 class='nom'> <?= htmlspecialchars($banque['nom']); ?></h3>
+            <p class='description'><?= htmlspecialchars($banque['description']); ?></p>
+          </div>
+
+        <div class='read-more-btn'>
+          Lire la suite
+        </div>  
+
         </div>
 
-        <div>
-            <h3 class='nom'> <?=$img['nom'];?></h3>
-            <p class='description'><?=$img['description']?></p>      
-        </div>
-
-      <div>
-      <a href='banque.php?nom=<?=urlencode($img['nom'])?>'><div class='read-more-btn'>Lire la suite</div></a>
-      </div>
-      
-    </div>
-      </a>
-      <?php 
-    }
-  ?>
+        
+         </a>
+  <?php } ?>
 </div>
 
 

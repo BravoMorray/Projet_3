@@ -20,13 +20,22 @@ if(isset($_POST['Déconnection'])) {
 <body>
 
 <div class="Bandeau">
-  <div class="Logo"><a href="login.php"><img class="logo_Banque" src="images\logo.png"></a></div> 
+  <div class="Logo">
+    <a href="login.php">
+      <img class="logo_Banque" src="images\logo.png">
+    </a>
+  </div> 
   <div class="affichage_Username">
     <?php if(isset($_SESSION['active_User'])) : ?>
-      <?php echo($_SESSION['active_User']); ?>
+      <?php echo($_SESSION['active_User']); ?>  
       <img class="logo_Utilisateur" src="images\utilisateur_Logo.png">
-      <form method="post">
-        <input type="submit" name="Déconnection" value="Déconnection">
+      
+      <form method="get" action="parametres.php" class="parametres-form">
+        <input type="submit" name="Parametres" value="Paramètres">
+      </form>
+
+      <form method="post" class="deconnexion-form">
+          <input type="submit" name="Déconnection" value="Déconnection">
       </form>
     <?php endif; ?>
   </div>

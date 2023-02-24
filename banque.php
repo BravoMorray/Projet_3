@@ -196,9 +196,9 @@ $commentaires = $requete_commentaires->fetchAll(PDO::FETCH_ASSOC);
     echo '<div style="clear: both;"></div>'; // Crée un espace a taille ajustable entre l'entête et les commentaires
     foreach ($commentaires as $row) {
         echo '<div class="comment-box">';
-        echo '<p>Nom : ' . $row['Username'] . '</p>';
+        echo '<p>Nom : ' . htmlspecialchars($row['Username']) . '</p>';
         echo '<p>Date : ' . date("Y-m-d", strtotime($row['date'])) . '</p>';
-        echo '<p>Texte : ' . $row['contenu'] . '</p>';
+        echo '<p>Texte : ' . htmlspecialchars($row['contenu']) . '</p>';
         echo '</div>';
     }
     ?>

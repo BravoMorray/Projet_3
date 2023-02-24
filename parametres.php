@@ -2,6 +2,17 @@
 require('connectionbdd.php');
 ?>
 
+<!-- Sécurité impossible d'accéder si utilisateur non connecté -->
+
+<?php
+if (empty($_SESSION['active_User']))
+{
+    header('Location: login.php');
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,7 +77,7 @@ if(isset($_POST['submit_nouvelle_question_reponse'])){
     $nouvelle_reponse = $_POST['nouvelle_reponse'];
 
     // Mettre à jour la question et la réponse secrète dans la base de données
-    $requete_update_question_reponse = $db->prepare('UPDATE utilisateurs SET Question = :nouvelle_question, Reponse = :nouvelle_reponse WHERE Username = :nom_utilisateur');
+    $requete_update_question_reponse = $db->prepare('UPDATE users SET Question = :nouvelle_question, Reponse = :nouvelle_reponse WHERE Username = :nom_utilisateur');
     $requete_update_question_reponse->execute(array(':nouvelle_question' => $nouvelle_question, ':nouvelle_reponse' => $nouvelle_reponse, ':nom_utilisateur' => $nom_utilisateur));
 
     // Rediriger l'utilisateur vers la page de modification des paramètres de compte

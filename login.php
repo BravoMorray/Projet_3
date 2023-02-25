@@ -30,6 +30,7 @@ if (isset($_POST['username']) && isset($_POST['password']))
         $Motsdepasses_Tries = $Motsdepasses_Bruts->fetchAll();
        if (!empty($Motsdepasses_Tries) && password_verify($_POST['password'], $Motsdepasses_Tries[0][0])) // Affiner avec passwordverify par la suite
           {
+          session_start();
           $_SESSION['active_User'] = $_POST['username'];
           header('Location: Accueil.php');
           }

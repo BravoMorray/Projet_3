@@ -5,15 +5,18 @@ require('connectionbdd.php');
 <!-- Sécurité impossible d'accéder si utilisateur non connecté -->
 
 
-
 <?php
-/* if (!isset($_SESSION['active_User']))
+if(!isset($_SESSION))
+{
+ session_start();
+}
+
+if (!isset($_SESSION['active_User']))
 {
     header('Location: login.php');
     exit();
-} */ 
+} 
 ?>
- 
 
 <!DOCTYPE html>
 <html>
@@ -87,7 +90,7 @@ $id_banque = $requete_2->fetchColumn(); //Récupérer ID banque
     if ($commentaire_existant == false)
     {
     $insertion = $db->prepare('INSERT INTO commentaires(id_user, id_banque, contenu, date) VALUES(:id_user, :id_banque, :contenu, :date)');
-    $date = date('Y-m-d H:i'); 
+    $date = date('Y-m-d'); 
     $insertion->execute([
         'id_user' => $id_utilisateur,
         'id_banque' => $id_banque,
@@ -194,7 +197,7 @@ $id_banque = $requete_2->fetchColumn();
 <<?php
 // récupération des commentaires correspondant à la banque
 $requete_commentaires = $db->prepare("
-    SELECT c.`contenu`, DATE_FORMAT(c.`date`, ' %d/%m/%Y à %Hh%i') AS dateCreation, u.`Username`
+    SELECT c.`contenu`, DATE_FORMAT(c.`date`, ' %d/%m/%Y') AS dateCreation, u.`Username`
     FROM `commentaires` c
     JOIN `users` u ON c.`id_user` = u.`ID`
     WHERE c.`id_banque` = :id_banque

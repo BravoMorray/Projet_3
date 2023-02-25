@@ -5,11 +5,16 @@ require('connectionbdd.php');
 <!-- Sécurité impossible d'accéder si utilisateur non connecté -->
 
 <?php
-/* if (!isset($_SESSION['active_User']))
+if(!isset($_SESSION))
+{
+ session_start();
+}
+
+if (!isset($_SESSION['active_User']))
 {
     header('Location: login.php');
     exit();
-} */ 
+} 
 ?>
  
 

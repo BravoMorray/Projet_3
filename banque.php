@@ -2,6 +2,22 @@
 require('connectionbdd.php');
 ?>
 
+<!-- Sécurité impossible d'accéder si utilisateur non connecté -->
+
+
+<?php
+if(!isset($_SESSION))
+{
+ session_start();
+}
+
+if (!isset($_SESSION['active_User']))
+{
+    header('Location: login.php');
+    exit();
+} 
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,15 +88,16 @@ $id_banque = $requete_2->fetchColumn(); //Récupérer ID banque
     $res_5->execute(array(':id_user' => $id_utilisateur , ':id_banque' => $id_banque));
     $commentaire_existant=$res_5->fetchColumn();
     if ($commentaire_existant == false)
-        {
-            $insertion = $db->prepare('INSERT INTO commentaires(id_user, id_banque, contenu, date) VALUES(:id_user, :id_banque, :contenu, :date)');
-            $insertion->execute([
-            'id_user' => $id_utilisateur,
-            'id_banque' => $id_banque,
-            'contenu' => $_POST['text'],
-            'date' => date("Y-m-d")
-            ]);
-        }
+    {
+    $insertion = $db->prepare('INSERT INTO commentaires(id_user, id_banque, contenu, date) VALUES(:id_user, :id_banque, :contenu, :date)');
+    $date = date('Y-m-d'); 
+    $insertion->execute([
+        'id_user' => $id_utilisateur,
+        'id_banque' => $id_banque,
+        'contenu' => $_POST['text'],
+        'date' => $date
+    ]);
+}
     else 
         {
         echo '<script type="text/javascript">'; // Commande qui fait apparaitre un pop-up
@@ -177,10 +194,10 @@ $requete_2->execute(array(':nom' => $nom_2));
 $id_banque = $requete_2->fetchColumn();
 ?>
 
-<?php
+<<?php
 // récupération des commentaires correspondant à la banque
 $requete_commentaires = $db->prepare("
-    SELECT c.`contenu`, c.`date`, u.`Username`
+    SELECT c.`contenu`, DATE_FORMAT(c.`date`, ' %d/%m/%Y') AS dateCreation, u.`Username`
     FROM `commentaires` c
     JOIN `users` u ON c.`id_user` = u.`ID`
     WHERE c.`id_banque` = :id_banque
@@ -196,13 +213,14 @@ $commentaires = $requete_commentaires->fetchAll(PDO::FETCH_ASSOC);
     echo '<div style="clear: both;"></div>'; // Crée un espace a taille ajustable entre l'entête et les commentaires
     foreach ($commentaires as $row) {
         echo '<div class="comment-box">';
-        echo '<p>Nom : ' . $row['Username'] . '</p>';
-        echo '<p>Date : ' . date("Y-m-d", strtotime($row['date'])) . '</p>';
-        echo '<p>Texte : ' . $row['contenu'] . '</p>';
+        echo '<p>Nom : ' . htmlspecialchars($row['Username']) . '</p>';
+        echo '<p>Date : ' . htmlspecialchars($row['dateCreation']) . '</p>';
+        echo '<p>Texte : ' . htmlspecialchars($row['contenu']) . '</p>';
         echo '</div>';
     }
     ?>
 </div>
+
 
 </body>
 </html>

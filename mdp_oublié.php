@@ -43,10 +43,11 @@ if (isset($_SESSION['active_User']))
 
 if (isset($_POST["submit_adresse_mail"]))
 {
-    if(Mail_Exist($_POST["adresse_mail"]))
+    $_SESSION["mail"] = $_POST["adresse_mail"];
+    if(Mail_Exist($_SESSION["mail"]))
     {
         $Question_associee = $db->prepare('SELECT Question FROM users WHERE Mail = :Mail');
-        $Question_associee -> execute(['Mail' => $_POST["adresse_mail"]]);
+        $Question_associee -> execute(['Mail' => $_SESSION["mail"]]);
         $Question = $Question_associee -> fetch();
         ?>
         <p> Merci de répondre à votre question secrète </p> <br>
@@ -54,7 +55,7 @@ if (isset($_POST["submit_adresse_mail"]))
         <p> <?php echo($Question[0]); ?> </p> 
         <form method="post" action="changement_mdp.php">
         <input type="text" name="reponse">
-        <input type="hidden" name="email" value="<?= $_POST['adresse_mail'] ?>">
+        <input type="hidden" name="email" value="<?= htmlspecialchars($_SESSION["mail"]) ?>">
         <button type="submit" name="submit_reponse">Réponse secrète</button>
         </form><?php
 

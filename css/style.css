@@ -509,7 +509,7 @@ text-align: center;
 
 @media only screen and (max-width: 768px) {
 .banque-card {
-width: 100%;
+width: 80%;
 padding: 15px;
 }
 }
@@ -517,5 +517,11 @@ padding: 15px;
 .Bandeau 
 {
   display : flex;
+}
+}
+
+@media only screen and (max-width: 768px) {
+.description {
+margin-bottom : 10%;
 }
 }

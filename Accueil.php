@@ -44,33 +44,31 @@ if (!isset($_SESSION['active_User']))
     // Préparation de la requete sql
     $res = $db->prepare('SELECT nom, logo, description FROM banques');
     $res->execute();
-
     // Fetch des résultats
-    $banques = $res->fetchAll(PDO::FETCH_ASSOC);
+    
+$banques = $res->fetchAll(PDO::FETCH_ASSOC);
 
-    // Boucle sur chaque image et affichage correspondant au cahier des charges
- foreach ($banques as $banque) { ?>
+// Boucle sur chaque image et affichage correspondant au cahier des charges
+foreach ($banques as $banque) { ?>
     <a class='banque-link' href="banque.php?nom=<?= urlencode($banque['nom']) ?>">
         <div class='banque-card'>
-          <div>
-            <img class="logo" src="data:image/png;base64,<?= base64_encode($banque['logo']) ?>">
-          </div>
+            <div>
+                <img class="logo" src="data:image/png;base64,<?= base64_encode($banque['logo']) ?>">
+            </div>
 
-          <div>
-            <h3 class='nom'> <?= htmlspecialchars($banque['nom']); ?></h3>
-            <p class='description'><?= htmlspecialchars($banque['description']); ?></p>
-          </div>
+            <div>
+                <h3 class='nom'> <?= htmlspecialchars($banque['nom']); ?></h3>
+                <p class='description'><?= htmlspecialchars($banque['description']); ?></p>
+            </div>
 
-        <div class='read-more-btn'>
-          Lire la suite
-        </div>  
+            <div class='read-more-btn'>
+                Lire la suite
+            </div>  
 
         </div>
+    </a>
+<?php } ?>
 
-        
-         </a>
-  <?php } ?>
-</div>
 
 
 </body>

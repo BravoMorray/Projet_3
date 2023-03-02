@@ -44,6 +44,29 @@ else
 ?>
 
 
+<!-- Vérification du pseudo --> 
+<?php
+function Pseudo_Ok(string $pseudo) : bool
+{
+require('connectionbdd.php');
+$Pseudos_Bruts = $db->prepare('SELECT Username FROM users WHERE Username = :Username');
+$Pseudos_Bruts->execute(['Username' => $pseudo]);
+$Pseudos_Tries = $Pseudos_Bruts->fetchAll();
+$var = false;
+foreach   ($Pseudos_Tries as $Pseudos_Tries)
+{
+    $var=in_array($pseudo, $Pseudos_Tries);
+}
+if ($var == true)
+{return false;}
+else
+{return true;}
+}
+
+?>
+
+
+
 <!-- Traitement du formulaire -->
 
 <?php
@@ -52,17 +75,25 @@ if (isset($_POST['Username']) AND isset($_POST['Mail']) AND isset($_POST['Passwo
     {
         if(filter_var($_POST['Mail'], FILTER_VALIDATE_EMAIL, 0) != false)
         {
-            if(Mail_OK($_POST['Mail'])) {
-            $Requete = 'INSERT INTO users(Username, Mail, Password, Question, Reponse) VALUES(:Username, :Mail, :Password, :Question, :Reponse) ';
-            $InsertionUtilisateur = $db->prepare($Requete);
-            $InsertionUtilisateur->execute([
-            'Username' => $_POST['Username'],
-            'Mail' => $_POST['Mail'],
-            'Password' => password_hash($_POST['Password'], PASSWORD_DEFAULT),
-            'Question' => $_POST['Question'],
-            'Reponse' => $_POST['Reponse'],
-                ]);
-            echo('Vous êtes inscrit avec succès');
+            if(Mail_OK($_POST['Mail'])) 
+            {
+                if(Pseudo_Ok($_POST['Username']))
+                {
+                    $Requete = 'INSERT INTO users(Username, Mail, Password, Question, Reponse) VALUES(:Username, :Mail, :Password, :Question, :Reponse) ';
+                    $InsertionUtilisateur = $db->prepare($Requete);
+                    $InsertionUtilisateur->execute([
+                    'Username' => $_POST['Username'],
+                    'Mail' => $_POST['Mail'],
+                    'Password' => password_hash($_POST['Password'], PASSWORD_DEFAULT),
+                    'Question' => $_POST['Question'],
+                    'Reponse' => $_POST['Reponse'],
+                    ]);
+                    echo('Vous êtes inscrit avec succès');
+                }
+                else
+                {
+                echo('Ce pseudo est déja utilisé');
+                }
             }
             else
             {

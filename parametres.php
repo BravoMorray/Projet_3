@@ -78,15 +78,22 @@ if(isset($_POST['submit_nouveau_mot_de_passe'])){
 }
 
 if(isset($_POST['submit_nouvelle_question_reponse'])){
-    $nouvelle_question = $_POST['nouvelle_question'];
-    $nouvelle_reponse = $_POST['nouvelle_reponse'];
+    if(isset($_POST['nouvelle_question']) && isset($_POST['nouvelle_reponse']) && !empty($_POST['nouvelle_question']) && !empty($_POST['nouvelle_reponse']) )
+    {
+        $nouvelle_question = $_POST['nouvelle_question'];
+        $nouvelle_reponse = $_POST['nouvelle_reponse'];
 
-    // Mettre à jour la question et la réponse secrète dans la base de données
-    $requete_update_question_reponse = $db->prepare('UPDATE users SET Question = :nouvelle_question, Reponse = :nouvelle_reponse WHERE Username = :nom_utilisateur');
-    $requete_update_question_reponse->execute(array(':nouvelle_question' => $nouvelle_question, ':nouvelle_reponse' => $nouvelle_reponse, ':nom_utilisateur' => $nom_utilisateur));
+        // Mettre à jour la question et la réponse secrète dans la base de données
+        $requete_update_question_reponse = $db->prepare('UPDATE users SET Question = :nouvelle_question, Reponse = :nouvelle_reponse WHERE Username = :nom_utilisateur');
+        $requete_update_question_reponse->execute(array(':nouvelle_question' => $nouvelle_question, ':nouvelle_reponse' => $nouvelle_reponse, ':nom_utilisateur' => $nom_utilisateur));
 
-    // Rediriger l'utilisateur vers la page de modification des paramètres de compte
-    header("Location: parametres.php");
+        // Rediriger l'utilisateur vers la page de modification des paramètres de compte
+        header("Location: parametres.php");
+    }
+    else
+    {
+    echo("Merci de saisir une question ET une réponse");
+    }
 }
 ?>
 

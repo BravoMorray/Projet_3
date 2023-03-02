@@ -39,7 +39,7 @@ if(isset($_POST['Déconnection'])) {
       </form>
 
       <form method="post" class="deconnexion-form">
-          <input type="submit" name="Déconnection" value="Déconnection">
+          <input type="submit" name="Déconnection" value="Déconnexion">
       </form>
     <?php endif; ?>
   </div>

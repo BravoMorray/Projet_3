@@ -68,7 +68,8 @@ if (isset($_POST['username']) && isset($_POST['password']))
 <input type="password" class="Mot-de-passe" name="password" placeholder="Mot de passe">
 <!-- bouton -->
 <input type="submit" value="Connexion " name="submit" class="Bouton">
- <p class="box-register">Vous êtes nouveau ici? <a href="register.php">S'inscrire</a></p> 
+ <p class="box-register">Vous êtes nouveau ici? <a href="register.php">S'inscrire</a></p>  <br>
+ <p class="box-register">Vous avez oublié votre mot de passe ? <a href="mdp_oublié.php">Changez le ici</a></p> 
 </form>
 
 </div>

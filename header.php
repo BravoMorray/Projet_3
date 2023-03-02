@@ -16,23 +16,18 @@ if(isset($_POST['Déconnection'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+
 
 <div class="Bandeau">
   <div class="Logo">
     <a href="login.php">
-      <img class="logo_Banque" src="images\logo.png">
+      <img class="logo_Banque" alt="logo banque" src="images/logo.png">
     </a>
   </div> 
   <div class="affichage_Username">
     <?php if(isset($_SESSION['active_User'])) : ?>
       <?php echo($_SESSION['active_User']); ?>  
-      <img class="logo_Utilisateur" src="images\utilisateur_Logo.png">
+      <img class="logo_Utilisateur" alt="logo utilisateur" src="images/utilisateur_Logo.png">
       
       <form method="get" action="parametres.php" class="parametres-form">
         <input type="submit" name="Parametres" value="Paramètres">
@@ -45,5 +40,4 @@ if(isset($_POST['Déconnection'])) {
   </div>
 </div>
 
-</body>
-</html>
+

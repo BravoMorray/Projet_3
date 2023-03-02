@@ -13,6 +13,7 @@ if(!isset($_SESSION))
 <html>
 <head>
 <?php include('style.php'); ?>
+<title> Inscription a GBAF </title>
 </head>
 <body>
 <?php include('header.php'); ?>
@@ -113,7 +114,7 @@ if (isset($_POST['Username']) AND isset($_POST['Mail']) AND isset($_POST['Passwo
 
 <div id="container-2">
 
-<form class="box" action="" method="post" name="register">
+<form class="box" method="post" name="register">
 <h1 class="box-title"> Inscription sur GBAF </h1>
 
 <!-- utilisateurs -->
@@ -139,7 +140,7 @@ Saisissez ici votre réponse secrete
 <!-- bouton -->
 
 <input type="submit" value="Valider " name="submit" class="box-button">
-
+</form>
 </div>
 
 <?php include('footer.php'); ?>

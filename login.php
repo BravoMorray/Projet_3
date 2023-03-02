@@ -16,6 +16,7 @@ if(!isset($_SESSION))
 <html>
 <head>
 <?php include('style.php'); ?>
+<title> Connection a GBAF </title>
 </head>
 <body>
 
@@ -60,7 +61,7 @@ if (isset($_POST['username']) && isset($_POST['password']))
 
 <div id="container">
 
-<form action="" method="post" name="login">
+<form method="post" name="login">
  <h1>Connexion GBAF</h1> 
 <!-- utilisateurs -->
 <input type="text" class="Identifiant" name="username" placeholder="Nom d'utilisateur">

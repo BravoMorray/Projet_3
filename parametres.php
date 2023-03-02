@@ -22,8 +22,9 @@ if (!isset($_SESSION['active_User']))
 <html>
 <head>
 <?php include('style.php'); ?>
+<title> Parametres du compte </title>
 </head>
-</head>
+
 <body>
 <?php include('header.php'); ?>
 
@@ -131,7 +132,8 @@ Réponse Actuelle : <?php echo($informations_utilisateur[0]['Reponse']); ?>
 
 </div>
 
-</body>
-</html>
 
 <?php include('footer.php'); ?>
+
+</body>
+</html>

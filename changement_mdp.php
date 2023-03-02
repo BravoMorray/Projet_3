@@ -21,6 +21,7 @@ if (isset($_SESSION['active_User']))
 <html>
 <head>
 <?php include('style.php'); ?>
+<title> Changement de mot de passe </title>
 </head>
 <body>
 <?php include('header.php'); ?>

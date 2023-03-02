@@ -141,7 +141,7 @@ $id_banque = $requete_2->fetchColumn(); //Récupérer ID banque
             <input type="submit" id="downvote" name="vote" value="downvote">
         </form>
         <?php
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' & isset($_POST['vote'])) {
             $vote = $_POST['vote'];
             $deja_vote_sql = $db->prepare("SELECT * FROM votes WHERE id_user = :id_user AND id_banque = :id_banque");
             $deja_vote_sql->execute(array(':id_user' => $id_utilisateur, ':id_banque' => $id_banque));

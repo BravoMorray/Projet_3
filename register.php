@@ -62,7 +62,7 @@ if (isset($_POST['Username']) AND isset($_POST['Mail']) AND isset($_POST['Passwo
             'Question' => $_POST['Question'],
             'Reponse' => $_POST['Reponse'],
                 ]);
-            echo('Bah bravo morray, c est réussi !');
+            echo('Vous êtes inscrit avec succès');
             }
             else
             {
@@ -91,7 +91,7 @@ if (isset($_POST['Username']) AND isset($_POST['Mail']) AND isset($_POST['Passwo
 
 <!-- mail -->
 Saisissez ici votre adresse e-mail
-<input type="e-mail" class="box-input" name="Mail" placeholder="Adresse mail">
+<input type="email" class="box-input" name="Mail" placeholder="Adresse mail">
 
 <!-- mdp -->
 Saisissez ici votre mot de passe
@@ -102,7 +102,7 @@ Saisissez ici votre question secrete
 <input type="password" class="box-input" name="Question" placeholder="Question secrete">
 
 <!-- Reponse secrete -->
-Saisissez ici votre question secrete
+Saisissez ici votre réponse secrete
 <input type="password" class="box-input" name="Reponse" placeholder="Question secrete">
 
 <!-- bouton -->

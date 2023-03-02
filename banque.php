@@ -22,7 +22,7 @@ if (!isset($_SESSION['active_User']))
 <html>
 <head>
 <?php include('style.php'); ?>
-</head>
+<title> Banque partenaire </title>
 </head>
 <body>
 
@@ -44,7 +44,7 @@ $banque = $res->fetch(PDO::FETCH_ASSOC);
 // Afficher les informations correspondantes
 echo "<div class='banque-card-2'>";
     echo "<h2 class='nom'>" . $banque['nom'] . "</h2>";
-    echo '<img class="logo" src="data:image/png;base64,'.base64_encode($banque['logo']).'">';
+    echo '<img class="logo" alt="logo banque" src="data:image/png;base64,'.base64_encode($banque['logo']).'">';
     echo "<p class='description'>" . $banque['description'] . "</p>";
 echo "</div>";
 
@@ -194,7 +194,7 @@ $requete_2->execute(array(':nom' => $nom_2));
 $id_banque = $requete_2->fetchColumn();
 ?>
 
-<<?php
+<?php
 // récupération des commentaires correspondant à la banque
 $requete_commentaires = $db->prepare("
     SELECT c.`contenu`, DATE_FORMAT(c.`date`, ' %d/%m/%Y') AS dateCreation, u.`Username`
@@ -222,7 +222,10 @@ $commentaires = $requete_commentaires->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 
-</body>
-</html>
+
+
 
 <?php include('footer.php'); ?>
+
+</body>
+</html>

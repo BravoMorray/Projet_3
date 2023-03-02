@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="normalize.css" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-
+<footer>
 <div class="liens">
-  <div class="Contact"> <a href="contact.php" > CONTACT </a> </div>
-  <div class="Mentions-légales"> <a href="mentions.php" > MENTIONS LEGALES </div>
+  <div class="Contact"> 
+    <a href="contact.php"> CONTACT </a> 
+  </div>
+  <div class="Mentions-légales"> 
+    <a href="mentions.php"> MENTIONS LEGALES </a> 
+  </div>
 </div>
-
-</body>
-</html>
+</footer>
